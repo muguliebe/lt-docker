@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - AUTH=yes
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_PORT=27017
+      - APP_MONGO_DB=test
+      - APP_MONGO_USER=test
+      - APP_MONGO_PASS=test
+    volumes:
+      - ./data/db:/data/db
+      - ./entrypoint:/docker-entrypoint-initdb.d
+
+    ports:
+      - 27017:27017
+    # command: mongod --smallfiles
+    command: mongod --smallfiles --auth --logpath=/dev/null

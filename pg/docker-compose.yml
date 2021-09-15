@@ -1,0 +1,13 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "55432:5432"
+    environment:
+      POSTGRES_DB: main
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ./postgres:/var/lib/postgres
+      - ./entrypoint:/docker-entrypoint-initdb.d
